@@ -1,0 +1,274 @@
+lista_empleados = []
+
+def alta_empleado():
+
+   global empleado
+
+   global datos
+
+   global lista_empleados
+
+   leer.archivo(empleado)
+
+   empleado = []
+
+   datos = []
+
+   id = int(input("Teclea el ID del empleado: "))
+   nombre = input("Teclea el nombre del empleado: ")
+   edad = int(input("Teclea la edad del empleado: "))
+   peso = int(input("Teclea el peso (Kg.) del empleado: "))
+   estatura = int(input("Ingresa la estatura (Cms.) del empleado: "))
+   diabetes = int(input("Diabetes 1-Sí 0-No ? "))
+   hipertensión = int(input("Hipertensión 1-Sí 0-No ? "))
+   corazón = int(input("Enfermedad del corazón 1-Sí 0-No ? "))
+   cancer = int(input("Cancer 1-Sí 0-No ? "))
+   tabaquismo = int(input("Tabaquismo 1-Sí 0-No ? "))
+   vacuna = int(input("Vacuna COVID-19 1-Sí 0-No ? "))
+
+   estatura = estatura / 100
+
+   datos = id, nombre, edad, peso, estatura, diabetes, hipertensión, corazón, cancer, tabaquismo, vacuna
+
+
+   lista_empleados.append(datos)
+
+   print(lista_empleados)
+
+   guardar_archivo(empleado)
+
+
+alta_empleado()
+
+def menu():
+
+  sigue = True
+
+  while True:
+
+    main()
+
+    clave = input("Selecciona una opción: ")
+
+    if clave == "1":
+      alta_empleado()
+      continue
+
+    if clave == "2":
+      calcular_imc()
+      continue
+
+    if clave == "3":
+      actualizar_empleado(lista_empleados)
+      continue
+
+    if clave == "4":
+      consultar_empleado()
+      continue
+
+    if clave == "5":
+      crear_reporte_empleados()
+      continue
+
+    if clave == "6":
+      crear_reporte_empleados()
+      continue
+
+    elif clave == "7":
+      salir() 
+      break
+
+menu()
+
+def main():
+    print("Sistema de Salud y Bienestar del Empleado")
+    print("1. Alta de empleado")
+    print("2. Calcular IMC de empleados")
+    print("3. Cambia información del empleado")
+    print("4. Consulta un empleado")
+    print("5. Reporte de todos los empleados")
+    print("6. Reporte de empleados por departamento")
+    print("7. Salir")
+main()
+
+global lista_empleados
+global empleado
+global datos
+
+def calcular_imc():
+
+  leer_archivo(empleado)
+
+  sobrepeso = 0
+  peso = 0
+  moderado = 0
+  severo = 0
+  aceptable = 0
+  obesidad = 0
+
+  texto = lista_empleados
+
+  for num in texto:
+    ver_imc = ""
+    porcentaje_severo = ""
+    porcentaje_moderada = ""
+    porcentaje_aceptable = ""
+    porcentaje_normal = ""
+    porcentaje_sobrepeso = ""
+
+  for lista_empleados[0] in range(1):
+
+   imc = (datos[3]) / (datos[4] * datos[4])
+   print("El IMC es", imc)
+
+   if imc < 18.50:
+      if imc < 16:
+        print("Delgadez Severa")
+   if imc >= 16 and imc <= 16.99:
+        print("Delgadez Moderada")
+   if imc >= 17 and imc <= 18.49:
+       print("Delgadez Aceptable")
+   if imc >= 18.50 and imc <= 24.99:
+       print("Peso Normal")
+   if imc >= 25 and imc <= 29.99:
+        print("Sobrepeso, Pre-obeso (riesgo)")
+   if imc >= 30 and imc <= 34.99:
+       print("Obeso tipo 1, (riesgo moderado)")
+   if imc >= 35 and imc <= 39.99:
+       print("Obeso tipo 2, (riesgo severo)")
+   if imc >= 40:
+       print("Obeso tipo 3, (riesgo muy severo)")
+
+calcular_imc()
+
+def actualizar_empleado(lista_empleados):
+
+  global datos
+
+  leer_archivo(empleado)
+
+  verificación = int(input("Teclea el ID del empleado: "))
+ 
+
+  for empleado in lista_empleados:
+    id = datos[0]
+    if id == verificación:
+      id_empleado = int(id)
+      print("El empleado es existente.")
+      actualizar = int(input("Que cambio quieres realizar? "))
+      if actualizar >= 2 or actualizar <= 4:
+        confirmación = int(input("Seguro que desea realizar este cambio (1-si, 2-no)? "))
+        if confirmación == 1:
+          empleado_actualizado = float(input("Ingrese el dato a cambiar: "))
+          datos[id_empleado - 1][actualizar] = empleado_actualizado
+        else:
+          print("El cambio no fue realizado.")
+
+  guardar_archivo(empleado)
+
+actualizar_empleado(lista_empleados)
+
+global lista_empleados
+global empleados
+global datos
+
+def consultar_empleado():
+
+  leer_archivo(empleado)
+
+  consulta = int(input("Ingresa el ID del empleado: "))
+
+  if consulta == datos[0]:
+    print(datos)
+
+  if consulta != datos[0]:
+    print("El ID es incorrecto.")
+
+consultar_empleado()
+
+global datos
+
+def crear_reporte_empleados(lista_empleados):
+  
+  for empleado in range(len(datos)):
+    diabetes = lista_empleados(datos[5])
+    hipertensión = lista_empleados(datos[6])
+    corazón = lista_empleados(datos[7])
+    cancer = lista_empleados(datos[8])
+    tabaquismo = lista_empleados(datos[9])
+
+    for empleado in range(len(datos)):
+
+      if datos[5] == 0:
+        diabetes = "_____"
+
+      else:
+        diabetes = "Diabetes"
+
+      if datos[6] == 0:
+        hipertensión = "_____"
+
+      else:
+        hipertensión = "Hipertensión"
+
+      if datos[7] == 0:
+        corazón = "_____"
+
+      else:
+        corazón = "Corazón"
+
+      if datos[8] == 0:
+        cancer = "_____"
+
+      else:
+        cancer = "Cancer"
+
+      if datos[9] == 0:
+        tabaquismo = "_____"
+
+      else:
+        tabaquismo = "Tabaquismo"
+
+  print(lista_empleados[0])
+  print(lista_empleados[1])
+  print(lista_empleados[2])
+
+
+crear_reporte_empleados(lista_empleados)
+
+def salir():
+  print("Hasta Luego.")
+
+  salir = False
+  return salir
+salir()
+
+global lista_empleados
+global empleado
+
+
+def leer_archivo(empleado):
+  
+  archivo = open("empleados.txt", "r")
+
+  archivo.readlines()
+
+  archivo.close()
+
+empleado = leer_archivo("empleados.txt")
+
+global lista_empleados
+global empleado
+
+def guardar_archivo(empleado):
+
+  lista_nueva = str(lista_empleados)
+
+  archivo = open("empleados.txt", "w")
+
+  archivo.writelines(lista_nueva)
+
+  archivo.close()
+
+guardar_archivo(empleado)
+
